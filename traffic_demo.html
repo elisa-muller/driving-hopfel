@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phantom Jam: A HOPFEL Traffic Stabilization Demo</title>
+<title>Phantom Jam: A HOPJam Traffic Demo</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&display=swap');
 
@@ -64,6 +64,20 @@
     --overlay:       rgba(234,228,216,0.93);
   }
 
+  /* Start screen always has a dark overlay — restore readable text for highway theme */
+  :root[data-theme="spanish"] #start-screen {
+    --text:     #ffffff;
+    --text-dim: rgba(255,255,255,0.72);
+  }
+  :root[data-theme="spanish"] .card-mode-title {
+    color: #ffffff;
+  }
+  :root[data-theme="spanish"] .card-mode-desc {
+    color: rgba(255,255,255,0.72);
+  }
+
+  html { font-size: 19px; }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -101,7 +115,7 @@
     align-items: center;
   }
   .mode-btn {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     font-size: 0.72rem;
     letter-spacing: 0.08em;
     padding: 5px 14px;
@@ -126,7 +140,7 @@
   }
   #theme-sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
   .theme-btn {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     font-size: 0.65rem;
     letter-spacing: 0.06em;
     padding: 4px 10px;
@@ -140,7 +154,7 @@
   .theme-btn:hover { color: var(--text); border-color: var(--text-dim); }
   .theme-btn.active { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(0,229,255,0.08); }
   #timer-display {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     font-size: 1.1rem;
     color: var(--accent-yellow);
     letter-spacing: 0.1em;
@@ -173,7 +187,8 @@
     border-bottom: 1px solid var(--border);
   }
   .panel-label {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
     font-size: 0.6rem;
     letter-spacing: 0.15em;
     color: var(--text-dim);
@@ -194,7 +209,7 @@
     letter-spacing: 0.04em;
   }
   .metric-val {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     font-size: 0.82rem;
     color: var(--accent-cyan);
     font-weight: 600;
@@ -219,7 +234,7 @@
     background: var(--accent-green);
   }
   #jam-risk-label {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     font-size: 0.75rem;
     text-align: right;
     margin-top: 2px;
@@ -280,7 +295,7 @@
   .key-hint {
     font-size: 0.6rem;
     opacity: 0.5;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
   }
 
   /* HOPFEL info */
@@ -312,7 +327,7 @@
     border: 1px solid var(--accent-purple);
     border-radius: 2px;
     font-size: 0.6rem;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     color: var(--accent-purple);
     letter-spacing: 0.1em;
     opacity: 0;
@@ -346,6 +361,10 @@
   }
   .overlay.hidden { opacity: 0; pointer-events: none; }
 
+  #start-screen {
+    background: rgba(10,12,20,0.78) !important;
+    backdrop-filter: blur(2px);
+  }
   #start-screen h2 {
     font-size: 1.5rem;
     font-weight: 900;
@@ -409,7 +428,7 @@
     font-size: 0.76rem;
   }
   #results-table th {
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     font-size: 0.6rem;
     letter-spacing: 0.12em;
     color: var(--text-dim);
@@ -422,7 +441,7 @@
   #results-table td {
     padding: 6px 10px;
     border-bottom: 1px solid rgba(30,37,64,0.5);
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
   }
   #results-table td.metric-label { color: var(--text-dim); font-size: 0.68rem; font-family: 'Exo 2', sans-serif; }
   #results-table td.val-hopfel { color: var(--accent-green); font-weight: 600; }
@@ -434,7 +453,7 @@
     padding: 2px 7px;
     border-radius: 2px;
     font-size: 0.55rem;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     letter-spacing: 0.1em;
     vertical-align: middle;
     margin-left: 5px;
@@ -503,14 +522,14 @@
     display: flex; justify-content: space-between; align-items: center;
     padding: 11px 18px;
     border-bottom: 1px solid var(--border);
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'Exo 2', sans-serif;
     font-size: 0.76rem; letter-spacing: 0.15em;
     color: var(--accent-cyan);
     flex-shrink: 0;
   }
   #settings-hdr-btns { display: flex; gap: 8px; align-items: center; }
   .settings-hdr-btn {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.65rem;
+    font-family: 'Exo 2', sans-serif; font-size: 0.65rem;
     letter-spacing: 0.08em; padding: 4px 12px;
     border: 1px solid var(--border); background: transparent;
     color: var(--text-dim); cursor: pointer; border-radius: 3px; transition: all 0.15s;
@@ -525,7 +544,7 @@
   .settings-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; align-items: start; }
   .settings-section { margin-bottom: 18px; }
   .settings-section-title {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+    font-family: 'Exo 2', sans-serif; font-size: 0.58rem;
     letter-spacing: 0.18em; color: var(--accent-purple);
     text-transform: uppercase; margin-bottom: 10px;
     padding-bottom: 4px; border-bottom: 1px solid var(--border);
@@ -538,7 +557,7 @@
   .param-label { font-size: 0.63rem; color: var(--text); }
   .param-unit { font-size: 0.54rem; color: var(--text-dim); margin-left: 3px; }
   .param-val {
-    font-family: 'Share Tech Mono', monospace; font-size: 0.7rem;
+    font-family: 'Exo 2', sans-serif; font-size: 0.7rem;
     color: var(--accent-cyan); min-width: 44px; text-align: right;
   }
   .param-slider {
@@ -546,25 +565,132 @@
     height: 4px; display: block;
   }
   #settings-note {
-    font-size: 0.58rem; color: var(--text-dim); font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem; color: var(--text-dim); font-family: 'Exo 2', sans-serif;
     padding: 8px 18px; border-top: 1px solid var(--border);
     flex-shrink: 0;
+  }
+
+  /* ── GUIDE OVERLAY ── */
+  .guide-section-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    color: var(--accent-purple);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .guide-card {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 10px 12px;
+    margin-bottom: 9px;
+    background: rgba(255,255,255,0.02);
+  }
+  .guide-card-head {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 5px;
+  }
+  .guide-card-body {
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .guide-card-body b { color: var(--accent-cyan); font-weight: 600; }
+
+  /* ── MODE CARDS (start screen) ── */
+  .start-mode-cards {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 520px;
+  }
+  .start-mode-card {
+    flex: 1;
+    padding: 16px 14px 14px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.02);
+    text-align: center;
+  }
+  .start-mode-card:hover { background: rgba(255,255,255,0.05); border-color: var(--text-dim); }
+  .start-mode-card.sel-solo {
+    border-color: var(--accent-cyan);
+    background: rgba(0,229,255,0.06);
+    box-shadow: 0 0 22px rgba(0,229,255,0.1);
+  }
+  .start-mode-card.sel-compare {
+    border-color: var(--accent-purple);
+    background: rgba(139,92,246,0.08);
+    box-shadow: 0 0 22px rgba(139,92,246,0.15);
+  }
+  .card-mode-icon { font-size: 1.5rem; margin-bottom: 5px; line-height: 1; }
+  .card-mode-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .card-mode-desc {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .card-hopfel-opts {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .card-hopfel-btn {
+    flex: 1;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    padding: 5px 4px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+  .card-hopfel-btn.sel-no {
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+    background: rgba(255,61,90,0.1);
+  }
+  .card-hopfel-btn.sel-yes {
+    border-color: var(--accent-purple);
+    color: var(--accent-purple);
+    background: rgba(139,92,246,0.12);
   }
 </style>
 </head>
 <body>
 
 <div id="header">
-  <h1>PHANTOM JAM <span>// HOPFEL</span> TRAFFIC STABILIZATION DEMO</h1>
+  <h1>PHANTOM JAM <span>// HOPJam</span> TRAFFIC DEMO</h1>
   <div id="mode-toggle">
-    <button class="mode-btn active-no" id="btn-no-hopfel" onclick="setMode(false)">✗ WITHOUT HOPFEL</button>
-    <button class="mode-btn" id="btn-yes-hopfel" onclick="setMode(true)">◈ WITH HOPFEL</button>
-    <button class="mode-btn" id="btn-compare" onclick="setComparisonMode(!comparisonMode)">⇄ SIDE-BY-SIDE</button>
+    <button class="mode-btn active-no" id="btn-no-hopfel" onclick="setMode(false)">✗ WITHOUT HOPJam</button>
+    <button class="mode-btn" id="btn-yes-hopfel" onclick="setMode(true)">◈ WITH HOPJam</button>
+    <button class="mode-btn" id="btn-compare" onclick="setComparisonMode(!comparisonMode)">⇄ COMPARISON</button>
     <button class="mode-btn" onclick="openSettings()" style="border-color:var(--accent-yellow);color:var(--accent-yellow)">⚙ PARAMS</button>
+    <button class="mode-btn" onclick="openGuide()" style="border-color:var(--accent-cyan);color:var(--accent-cyan)">? GUIDE</button>
     <div id="theme-sep"></div>
     <button class="theme-btn active" id="theme-neon" onclick="applyTheme('neon-city')">NEON CITY</button>
     <button class="theme-btn" id="theme-route66" onclick="applyTheme('route66')">ROUTE 66</button>
-    <button class="theme-btn" id="theme-spanish" onclick="applyTheme('spanish')">SPANISH HWY</button>
+    <button class="theme-btn" id="theme-spanish" onclick="applyTheme('spanish')">HIGHWAY</button>
   </div>
   <div style="display:flex;align-items:center;gap:10px">
     <div id="timer-display">⏱ 60s</div>
@@ -582,7 +708,7 @@
   <div class="legend-item"><div class="legend-dot" style="background:#ffd740"></div>You (Player)</div>
   <div class="legend-item"><div class="legend-dot" style="background:#3a7fff"></div>Traffic Cars</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ff3d5a"></div>Braking</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>HOPFEL Ghost</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>HOPJam Ghost</div>
   <div class="legend-item"><div class="legend-dot" style="background:#00e676"></div>Smooth Flow</div>
   <div style="flex:1"></div>
   <div class="legend-item" style="font-size:0.62rem;color:var(--text-dim)">60-second simulation · Use controls or keyboard arrows</div>
@@ -632,8 +758,8 @@
     <canvas id="road-canvas"></canvas>
 
     <div class="overlay" id="start-screen">
-      <h2>PHANTOM JAM</h2>
-      <p id="start-subtitle">HOPFEL Traffic Stabilization Demo · 60-second simulation</p>
+      <h2>HOPJAM</h2>
+      <p id="start-subtitle">Phantom Jam · HOPJam Traffic Demo · 60-second simulation</p>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
         <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;color:var(--text-dim)">DURATION</span>
         <input type="range" id="duration-slider" min="10" max="180" step="5" value="60"
@@ -648,22 +774,36 @@
           style="width:130px;accent-color:var(--accent-cyan);cursor:pointer">
         <span id="density-slider-label" style="font-family:'Share Tech Mono',monospace;font-size:1rem;color:var(--accent-cyan);min-width:42px;text-align:right">6</span>
       </div>
+      <div class="start-mode-cards">
+        <div class="start-mode-card sel-solo" id="card-solo" onclick="selectCard('solo')">
+          <div class="card-mode-icon">◉</div>
+          <div class="card-mode-title">Solo Run</div>
+          <div class="card-mode-desc">Drive through traffic alone. You control the outcome.</div>
+          <div class="card-hopfel-opts">
+            <button class="card-hopfel-btn sel-no" id="sub-no-hopfel"
+              onclick="event.stopPropagation();setMode(false)">✗ No HOPJam</button>
+            <button class="card-hopfel-btn" id="sub-yes-hopfel"
+              onclick="event.stopPropagation();setMode(true)">◈ With HOPJam</button>
+          </div>
+        </div>
+        <div class="start-mode-card" id="card-compare" onclick="selectCard('compare')">
+          <div class="card-mode-icon">⇄</div>
+          <div class="card-mode-title">Comparison</div>
+          <div class="card-mode-desc">Split view: you drive the top lane, HOPJam drives the bottom. See the difference live.</div>
+        </div>
+      </div>
       <button class="big-btn primary" onclick="startSim()">▶ START SIMULATION</button>
-      <button class="big-btn secondary" id="btn-mode-toggle" onclick="setMode(!hopfelMode); document.getElementById('btn-mode-toggle').textContent = hopfelMode ? '◈ Switch to: WITHOUT HOPFEL' : '✗ Switch to: WITH HOPFEL'">
-        ✗ Switch to: WITH HOPFEL
-      </button>
-      <button class="big-btn secondary" id="btn-compare-start" onclick="setComparisonMode(!comparisonMode)">⇄ SIDE-BY-SIDE: OFF</button>
     </div>
 
     <div class="overlay hidden" id="results-screen">
       <h2>SIMULATION COMPLETE</h2>
-      <div class="sub">60-SECOND COMPARISON · HOPFEL vs BASELINE</div>
+      <div class="sub">60-SECOND COMPARISON · HOPJam vs BASELINE</div>
       <table id="results-table">
         <thead>
           <tr>
             <th>METRIC</th>
-            <th id="th-col-a" class="nohopfel-col">WITHOUT HOPFEL</th>
-            <th id="th-col-b" class="hopfel-col">WITH HOPFEL</th>
+            <th id="th-col-a" class="nohopfel-col">WITHOUT HOPJam</th>
+            <th id="th-col-b" class="hopfel-col">WITH HOPJam</th>
             <th>DIFFERENCE</th>
           </tr>
         </thead>
@@ -721,7 +861,7 @@
       </div>
     </div>
     <div class="panel-section">
-      <div class="panel-label">HOPFEL Cars</div>
+      <div class="panel-label">HOPJam Cars</div>
       <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
         <button onclick="changeGhostCount(-1)"
           style="flex:0 0 28px;height:28px;font-size:1rem;font-weight:700;
@@ -733,7 +873,7 @@
         <div style="flex:1;text-align:center">
           <div id="ghost-count-total"
             style="font-family:'Share Tech Mono',monospace;font-size:0.85rem;
-                   color:var(--accent-purple)">1 HOPFEL car</div>
+                   color:var(--accent-purple)">1 HOPJam car</div>
           <div style="font-size:0.58rem;color:var(--text-dim);margin-top:1px">applies on next start</div>
         </div>
         <button onclick="changeGhostCount(1)"
@@ -751,7 +891,7 @@
         <span style="color:var(--accent-red)">■ Human Drivers Active</span><br>
         Reaction delays cause cascading brake waves — the classic phantom jam phenomenon.
       </div>
-      <div class="hopfel-active-badge" id="hopfel-badge">◈ HOPFEL ACTIVE</div>
+      <div class="hopfel-active-badge" id="hopfel-badge">◈ HOPJam ACTIVE</div>
       <div id="god-mode-badge" style="display:none;margin-top:4px;padding:3px 8px;
         border:1px solid var(--accent-yellow);border-radius:2px;font-size:0.6rem;
         font-family:'Share Tech Mono',monospace;color:var(--accent-yellow);
@@ -768,12 +908,14 @@
       </button>
     </div>
     <div id="hopfel-info">
-      <div class="info-title">What is HOPFEL?</div>
+      <div class="info-title">What is HOPJam?</div>
       <div class="info-text">
-        <b>HOPFEL</b> (Hopf-based Flow Equilibration Layer) is a real-time traffic stability detection and intervention system inspired by the mathematics of <b>Hopf bifurcations</b>.<br><br>
-        In traffic dynamics, a <b>Hopf-like transition</b> occurs when uniform car flow suddenly bifurcates into oscillating stop-and-go waves — even without accidents or bottlenecks. Small perturbations amplify backward through the queue, creating <b>phantom jams</b>.<br><br>
-        HOPFEL acts as a <b>stability-detection layer</b>: it continuously monitors speed variance, inter-vehicle spacing, and deceleration events. When the system detects conditions approaching the bifurcation threshold, it deploys a <b>ghost buffer vehicle</b> — a connected autonomous agent — that absorbs and dampens the instability wave before it can amplify.<br><br>
-        The result: <b>smoother flow</b>, lower fuel consumption, reduced emissions, and significantly less driver stress — all without changing road capacity.
+        <b>HOPFEL</b> (Hopf Free Electron Laser) is a methodology originally developed to control Free Electron Lasers — powerful light sources that lose stability when their electron beam drifts close to a bifurcation point. Near this tipping point, a tiny disturbance is enough to push the system from a stable branch into chaotic oscillation. HOPFEL monitors proximity to this threshold in real time and tunes the system parameters to keep the beam stable before it can tip.<br><br>
+        <b>HOPJam</b> adapts this idea to road traffic. Instead of tracking electrons, it tracks cars. Instead of preventing laser instabilities, it prevents <b>phantom traffic jams</b>.<br><br>
+        <b>The uncomfortable truth this game is built to show:</b> phantom jams are caused by us — ordinary drivers — even though we never intend to. Every unnecessary brake, every moment of distraction, every time you follow too closely, you send a small deceleration wave backward. That wave amplifies. Other drivers overreact. Their brake lights trigger the next. A jam materialises kilometres behind the original cause, with no accident, no bottleneck, no explanation.<br><br>
+        In traffic dynamics this is a <b>Hopf-like bifurcation</b>: uniform flow tips into oscillating stop-and-go waves at a critical density. <b>HOPJam</b> acts as a <b>stability-detection layer</b>: it continuously monitors speed variance, inter-vehicle spacing, and deceleration events. When the system detects conditions approaching the bifurcation threshold, it deploys a <b>ghost buffer vehicle</b> — a connected autonomous agent — that absorbs and dampens the instability wave before it can amplify.<br><br>
+        The result: <b>smoother flow</b>, lower fuel consumption, reduced emissions, and significantly less driver stress — all without changing road capacity.<br><br>
+        <span style="color:var(--accent-yellow);font-size:0.58rem">HOPJam was created in 2026 as part of the <b>Technology for Social Innovation</b> course — UPC · ESADE · IED · UPV</span>
       </div>
     </div>
   </div>
@@ -792,6 +934,108 @@
     </div>
     <div id="settings-body"></div>
     <div id="settings-note">Changes apply live. Parameters marked ★ require a restart to take effect.</div>
+  </div>
+</div>
+
+<!-- Guide overlay -->
+<div id="guide-overlay" style="display:none;position:fixed;inset:0;align-items:center;
+  justify-content:center;background:rgba(0,0,0,0.75);z-index:50;backdrop-filter:blur(3px)">
+  <div style="background:var(--panel);border:1px solid var(--border);border-radius:6px;
+    width:min(780px,94vw);max-height:86vh;display:flex;flex-direction:column;
+    box-shadow:0 0 60px rgba(0,0,0,0.7),0 0 120px rgba(0,229,255,0.06)">
+
+    <!-- header -->
+    <div style="display:flex;justify-content:space-between;align-items:center;
+      padding:11px 18px;border-bottom:1px solid var(--border);flex-shrink:0">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:0.76rem;
+        letter-spacing:0.15em;color:var(--accent-cyan)">? PLAYER GUIDE</span>
+      <button onclick="closeGuide()" style="font-family:'Share Tech Mono',monospace;
+        font-size:0.65rem;letter-spacing:0.08em;padding:4px 12px;border:1px solid var(--border);
+        background:transparent;color:var(--text-dim);cursor:pointer;border-radius:3px;
+        transition:all 0.15s" onmouseover="this.style.borderColor='var(--accent-red)';this.style.color='var(--accent-red)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'">✕ CLOSE</button>
+    </div>
+
+    <!-- body -->
+    <div style="overflow-y:auto;padding:18px 22px;flex:1;display:grid;
+      grid-template-columns:1fr 1fr;gap:0 28px">
+
+      <!-- LEFT column -->
+      <div>
+        <div class="guide-section-title">Game Modes</div>
+
+        <div class="guide-card" style="border-color:var(--accent-cyan)">
+          <div class="guide-card-head" style="color:var(--accent-cyan)">◉ Solo Run — No HOPJam</div>
+          <div class="guide-card-body">The baseline. All cars are driven by imperfect human-like
+            reaction models. Every unnecessary brake you make sends a wave backward — watch phantom
+            jams form out of nowhere. <b>Goal:</b> try to keep traffic smooth on your own.</div>
+        </div>
+
+        <div class="guide-card" style="border-color:var(--accent-purple)">
+          <div class="guide-card-head" style="color:var(--accent-purple)">◉ Solo Run — With HOPJam</div>
+          <div class="guide-card-body">A <b>ghost buffer car</b> (purple) joins your lane and drives
+            autonomously. It monitors the bifurcation threshold and dampens instability waves before
+            they can amplify. Watch how one smart car changes the whole lane's behaviour.</div>
+        </div>
+
+        <div class="guide-card" style="border-color:var(--accent-cyan)">
+          <div class="guide-card-head" style="color:var(--accent-cyan)">⇄ Comparison Mode</div>
+          <div class="guide-card-body">The road splits into two lanes rendered side by side.
+            <b>Top lane:</b> you drive with normal traffic — no HOPJam.<br>
+            <b>Bottom lane:</b> HOPJam drives autonomously.<br>
+            Observe the difference in real time. At the end you get a side-by-side stat breakdown.</div>
+        </div>
+
+        <div class="guide-section-title" style="margin-top:14px">Controls</div>
+        <div class="guide-card" style="border-color:var(--border)">
+          <div class="guide-card-body" style="line-height:1.9">
+            <span style="color:var(--accent-green)">▲ Accelerate</span> — Arrow Up or button<br>
+            <span style="color:var(--accent-cyan)">■ Keep Speed</span> — Space or button<br>
+            <span style="color:var(--accent-red)">▼ Decelerate</span> — Arrow Down or button<br>
+            <span style="color:var(--accent-yellow)">⚡ Induce Jam</span> — J key or button<br>
+            <span style="color:var(--text-dim)">Induce Jam forces a random car to brake hard,
+            seeding a phantom jam — great for stress-testing HOPJam.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT column -->
+      <div>
+        <div class="guide-section-title">Ghost Car Types</div>
+
+        <div class="guide-card" style="border-color:var(--accent-purple)">
+          <div class="guide-card-head" style="color:var(--accent-purple)">◈ Smooth Follower <span style="color:var(--text-dim);font-weight:400">(default)</span></div>
+          <div class="guide-card-body">Uses a <b>PD controller</b> — tracks the car ahead's speed
+            and gap with proportional + derivative terms. On open road it cruises at target speed;
+            when traffic slows it glides to a smooth stop and re-accelerates cleanly.
+            Best all-round stability without creating a bottleneck.<br>
+            <span style="color:var(--text-dim);font-size:0.58rem">Toggle: side panel → ◈ Ghost button · Tune: ⚙ PARAMS → HOPJam GHOST — Smooth Follower</span>
+          </div>
+        </div>
+
+        <div class="guide-card" style="border-color:var(--accent-purple)">
+          <div class="guide-card-head" style="color:var(--accent-purple)">◈ Moving Buffer <span style="color:var(--text-dim);font-weight:400">(AV mode)</span></div>
+          <div class="guide-card-body">Maintains a <b>large absorbing gap</b> ahead (default 150 px).
+            When a car ahead slows, the buffer ghost decelerates early and gradually, absorbing the
+            deceleration wave into the gap rather than passing it backward. On free road it drives
+            normally. More aggressive wave absorption than Smooth Follower, but needs more space.<br>
+            <span style="color:var(--text-dim);font-size:0.58rem">Toggle: side panel → ◈ Ghost button · Tune: ⚙ PARAMS → HOPJam GHOST — Moving Buffer</span>
+          </div>
+        </div>
+
+        <div class="guide-section-title" style="margin-top:14px">Other Knobs</div>
+        <div class="guide-card" style="border-color:var(--border)">
+          <div class="guide-card-body" style="line-height:1.85">
+            <b style="color:var(--text)">Duration</b> <span style="color:var(--text-dim)">— start screen slider · 10 – 180 s</span><br>
+            <b style="color:var(--text)">Cars / Lane</b> <span style="color:var(--text-dim)">— start screen slider or side ± buttons · higher = more congestion</span><br>
+            <b style="color:var(--text)">HOPJam Cars</b> <span style="color:var(--text-dim)">— side ± buttons · add more ghost cars for stronger stabilisation</span><br>
+            <b style="color:var(--text)">⚙ PARAMS</b> <span style="color:var(--text-dim)">— deep-dive into every simulation parameter: reaction delays, safe gaps, gain values, brake wave physics and more. Changes apply live.</span><br>
+            <b style="color:var(--text)">Themes</b> <span style="color:var(--text-dim)">— NEON CITY · ROUTE 66 · HIGHWAY</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /body grid -->
   </div>
 </div>
 
@@ -901,20 +1145,20 @@ const PARAM_DEFS = [
     { key:'trafficAccelRate',     label:'Accel Convergence Rate',       unit:'× /s',    min:0.5,  max:10,   step:0.5  },
     { key:'trafficHardBrakeThr',  label:'Hard Brake Threshold',         unit:'km/h/s',  min:5,    max:50,   step:1    },
   ]},
-  { section: 'HOPFEL GHOST — Smooth Follower (PD)', params: [
+  { section: 'HOPJam GHOST — Smooth Follower (PD)', params: [
     { key:'ghostSafeGapBase',  label:'Desired Forward Gap Base',       unit:'px',      min:5,    max:80,   step:5    },
     { key:'ghostSafeGapCoeff', label:'Desired Gap Speed Coefficient',  unit:'',        min:0,    max:2.0,  step:0.05 },
     { key:'ghostConverge',     label:'Speed Convergence Rate',         unit:'× /s',    min:0.5,  max:10,   step:0.1  },
     { key:'ghostSpeedLag',     label:'Max Speed Lag vs Player',        unit:'km/h',    min:0,    max:40,   step:1    },
   ]},
-  { section: 'HOPFEL GHOST — Moving Buffer (AV)', params: [
+  { section: 'HOPJam GHOST — Moving Buffer (AV)', params: [
     { key:'ghostBufferVTarget', label:'Target Speed  (slow buffer)',   unit:'km/h',    min:5,    max:80,   step:5    },
     { key:'ghostBufferK1',      label:'Speed Tracking Gain  (k1)',     unit:'s⁻¹',     min:0,    max:3.0,  step:0.05 },
     { key:'ghostBufferK2',      label:'Closing Speed Damping  (k2)',   unit:'',        min:0,    max:5.0,  step:0.1  },
     { key:'ghostBufferK3',      label:'Gap Correction Gain  (k3)',     unit:'px⁻¹',    min:0,    max:0.3,  step:0.01 },
     { key:'ghostBufferSSafe',   label:'Safe Gap Ahead  (buffer size)', unit:'px',      min:40,   max:400,  step:10   },
   ]},
-  { section: 'HOPFEL CAR  (side-by-side)', params: [
+  { section: 'HOPJam CAR  (side-by-side)', params: [
     { key:'hopfelGapBase',     label:'Forward Desired Gap Base',       unit:'px',      min:5,    max:80,   step:5    },
     { key:'hopfelGapCoeff',    label:'Forward Gap Speed Coefficient',  unit:'',        min:0,    max:1.0,  step:0.05 },
     { key:'hopfelKp',          label:'Forward Gap Gain  (Kp)',         unit:'',        min:0,    max:1.0,  step:0.02 },
@@ -1003,7 +1247,7 @@ function resize() {
   canvas.width = wrap.clientWidth;
   canvas.height = wrap.clientHeight;
 }
-window.addEventListener('resize', resize);
+window.addEventListener('resize', () => { resize(); if (!simRunning) startIdleAnim(); });
 
 // ════════════════════════════════════════════════════════
 //  MODE
@@ -1012,7 +1256,7 @@ function setDuration(v) {
   simDuration = parseInt(v);
   document.getElementById('duration-label').textContent = v + 's';
   document.getElementById('start-subtitle').textContent =
-    `HOPFEL Traffic Stabilization Demo · ${v}-second simulation`;
+    `Phantom Jam · HOPJam Traffic Demo · ${v}-second simulation`;
   document.getElementById('timer-display').textContent = `⏱ ${v}s`;
 }
 
@@ -1022,11 +1266,24 @@ function setMode(h) {
   document.getElementById('btn-yes-hopfel').className = 'mode-btn' + (h ? ' active-yes' : '');
   document.getElementById('hopfel-badge').className = 'hopfel-active-badge' + (h ? ' visible' : '');
   document.getElementById('mode-desc').innerHTML = h
-    ? `<span style="color:var(--accent-purple)">◈ HOPFEL System Active</span><br>Ghost buffer car deployed. Monitoring bifurcation threshold and dampening instability waves.`
+    ? `<span style="color:var(--accent-purple)">◈ HOPJam System Active</span><br>Ghost buffer car deployed. Monitoring bifurcation threshold and dampening instability waves.`
     : `<span style="color:var(--accent-red)">■ Human Drivers Active</span><br>Reaction delays cause cascading brake waves — the classic phantom jam phenomenon.`;
-  // Update start screen switch button
-  const sb = document.querySelector('#start-screen .big-btn.secondary');
-  if (sb) sb.textContent = h ? '✗ Switch to: WITHOUT HOPFEL' : '◈ Switch to: WITH HOPFEL';
+  const subNo  = document.getElementById('sub-no-hopfel');
+  const subYes = document.getElementById('sub-yes-hopfel');
+  if (subNo)  subNo.className  = 'card-hopfel-btn' + (!h ? ' sel-no'  : '');
+  if (subYes) subYes.className = 'card-hopfel-btn' + ( h ? ' sel-yes' : '');
+}
+
+function selectCard(mode) {
+  if (mode === 'solo') {
+    setComparisonMode(false);
+    document.getElementById('card-solo').className    = 'start-mode-card sel-solo';
+    document.getElementById('card-compare').className = 'start-mode-card';
+  } else {
+    setComparisonMode(true);
+    document.getElementById('card-solo').className    = 'start-mode-card';
+    document.getElementById('card-compare').className = 'start-mode-card sel-compare';
+  }
 }
 
 function toggleMode() {
@@ -1037,15 +1294,18 @@ function toggleMode() {
 function setComparisonMode(on) {
   comparisonMode = on;
   document.getElementById('btn-compare').className = 'mode-btn' + (on ? ' active-yes' : '');
-  const btnCS = document.getElementById('btn-compare-start');
-  if (btnCS) btnCS.textContent = on ? '⇄ SIDE-BY-SIDE: ON' : '⇄ SIDE-BY-SIDE: OFF';
   // WITH/WITHOUT buttons are irrelevant in comparison mode
   document.getElementById('btn-no-hopfel').style.opacity = on ? '0.35' : '1';
   document.getElementById('btn-yes-hopfel').style.opacity = on ? '0.35' : '1';
+  // Keep start screen cards in sync when called from outside selectCard
+  const cardSolo    = document.getElementById('card-solo');
+  const cardCompare = document.getElementById('card-compare');
+  if (cardSolo)    cardSolo.className    = on ? 'start-mode-card' : 'start-mode-card sel-solo';
+  if (cardCompare) cardCompare.className = on ? 'start-mode-card sel-compare' : 'start-mode-card';
   document.getElementById('mode-desc').innerHTML = on
-    ? `<span style="color:var(--accent-cyan)">⇄ Side-by-Side Active</span><br>You drive the top lane. HOPFEL drives the bottom lane autonomously. Compare in real time.`
+    ? `<span style="color:var(--accent-cyan)">⇄ Comparison Active</span><br>You drive the top lane. HOPJam drives the bottom lane autonomously. Compare in real time.`
     : (hopfelMode
-        ? `<span style="color:var(--accent-purple)">◈ HOPFEL System Active</span><br>Ghost buffer car deployed.`
+        ? `<span style="color:var(--accent-purple)">◈ HOPJam System Active</span><br>Ghost buffer car deployed.`
         : `<span style="color:var(--accent-red)">■ Human Drivers Active</span><br>Reaction delays cause cascading brake waves.`);
 }
 
@@ -1055,7 +1315,7 @@ function applyTheme(name) {
   document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
   const idMap = { 'neon-city': 'theme-neon', 'route66': 'theme-route66', 'spanish': 'theme-spanish' };
   document.getElementById(idMap[name]).classList.add('active');
-  if (!simRunning) drawStatic();
+  if (!simRunning) startIdleAnim();
 }
 
 // ════════════════════════════════════════════════════════
@@ -1094,13 +1354,20 @@ function initSim() {
     const spacing = W / total;
     const pSlot   = playerSlot(total);
 
-    // Ghost slots: N slots chosen randomly from all non-player slots (single mode)
-    // Cap at (total - 1) so there's always at least one traffic car
+    // Ghost slots: N slots chosen from slots AHEAD of player (higher x = further ahead).
+    // Falls back to any non-player slot if there are none ahead.
+    // Cap at (total - 1) so there's always at least one traffic car.
     const gSlots = (() => {
       if (!hasGhost || lane !== playerLane) return [];
       const N = Math.max(1, Math.min(PARAMS.hopfelCarsCount, total - 1));
-      const candidates = [];
-      for (let s = 0; s < total; s++) { if (s !== pSlot) candidates.push(s); }
+      const aheadCandidates = [];
+      const anyCandidates   = [];
+      for (let s = 0; s < total; s++) {
+        if (s === pSlot) continue;
+        anyCandidates.push(s);
+        if (s > pSlot) aheadCandidates.push(s);
+      }
+      const candidates = aheadCandidates.length > 0 ? aheadCandidates : anyCandidates;
       // Fisher-Yates shuffle then take first N
       for (let i = candidates.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -1207,6 +1474,7 @@ function initSim() {
 //  START / RESET
 // ════════════════════════════════════════════════════════
 function startSim() {
+  stopIdleAnim();
   document.getElementById('start-screen').classList.add('hidden');
   document.getElementById('results-screen').classList.add('hidden');
   document.getElementById('btn-stop').style.display = 'block';
@@ -1323,8 +1591,7 @@ function update(dt) {
     player.speed = Math.max(player.speed - DECEL_RATE * dt, 0);
     player.braking = true;
   } else if (stats.holdSpeed) {
-    // cruise control
-    player.speed += (TARGET_SPEED - player.speed) * dt * 1.5;
+    // hold current speed exactly
     player.braking = false;
   } else {
     // natural drag toward target
@@ -1374,7 +1641,6 @@ function update(dt) {
       ghost.glowPhase += dt * 3;
       const peers = hopfelGhosts.filter(g => g !== ghost);
 
-      // Ghost is in FRONT of player — don't pass player as playerRef
       const ghostAhead  = getCarAhead(ghost, cars, null, null, peers);
       const ghostBehind = getCarBehind(ghost, cars, peers);
 
@@ -1388,12 +1654,19 @@ function update(dt) {
         ghost.speed += (target - ghost.speed) * dt * 3.0;
         ghost.speed = Math.max(0, Math.min(MAX_SPEED, ghost.speed));
       } else if (PARAMS.ghostBufferMode) {
-        const closingSpeed = ghostAhead ? ghost.speed - speedAhead : 0;
-        const gapError = ghostAhead ? Math.min(0, gapAhead - PARAMS.ghostBufferSSafe) : 0;
-        const dv = PARAMS.ghostBufferK1 * (PARAMS.ghostBufferVTarget - ghost.speed)
-                 - PARAMS.ghostBufferK2 * closingSpeed
-                 + PARAMS.ghostBufferK3 * gapError;
-        ghost.speed = Math.max(5, Math.min(MAX_SPEED, ghost.speed + dv * dt));
+        if (!ghostAhead) {
+          // Free road: cruise at target speed, no reason to slow down
+          ghost.speed += (TARGET_SPEED - ghost.speed) * dt * PARAMS.ghostConverge;
+        } else {
+          // Car ahead: maintain a large absorbing gap (ghostBufferSSafe) by
+          // adjusting speed relative to the car in front
+          const closingSpeed = ghost.speed - speedAhead;
+          const gapError     = Math.min(0, gapAhead - PARAMS.ghostBufferSSafe); // only pulls back when too close
+          const dv = PARAMS.ghostBufferK1 * (speedAhead - ghost.speed)  // match car ahead
+                   - PARAMS.ghostBufferK2 * closingSpeed                 // dampen approach
+                   + PARAMS.ghostBufferK3 * gapError;                    // gap correction
+          ghost.speed = Math.max(0, Math.min(MAX_SPEED, ghost.speed + dv * dt));
+        }
       } else {
         let desiredSpeed;
         if (!ghostAhead) {
@@ -1417,7 +1690,7 @@ function update(dt) {
         ghost.speed += (desiredSpeed - ghost.speed) * dt * PARAMS.ghostConverge;
       }
 
-      // Emergency brake: identical to traffic cars — speed-dependent safe gap, no reaction delay
+      // Emergency brake: traffic cars
       if (ghostAhead) {
         const emergSafeGap = PARAMS.trafficSafeGapBase + ghost.speed * PARAMS.trafficSafeGapCoeff;
         if (gapAhead < emergSafeGap * PARAMS.trafficEmergencyTrig) {
@@ -1427,26 +1700,24 @@ function update(dt) {
           }
         }
       }
+      // Emergency brake: player (only when ghost is behind player — ghost drives autonomously otherwise)
+      if (player.lane === ghost.lane) {
+        const pGap = (player.x - player.width / 2) - (ghost.x + ghost.width / 2);
+        if (pGap > 0) {
+          const eSafe = PARAMS.trafficSafeGapBase + ghost.speed * PARAMS.trafficSafeGapCoeff;
+          if (pGap < eSafe * PARAMS.trafficEmergencyTrig && ghost.speed > player.speed) {
+            const frac = Math.max(0, pGap / (eSafe * PARAMS.trafficEmergencyTrig));
+            ghost.speed = player.speed + frac * (ghost.speed - player.speed);
+          }
+        }
+      }
       ghost.speed = Math.max(0, Math.min(MAX_SPEED, ghost.speed));
 
       ghost.x += (ghost.speed / 3.6 * 8 - player.speed / 3.6 * 8) * dt;
 
-      // Respawn in a gap AHEAD of the player
-      if (ghost.x < -200 || ghost.x > W + 100) {
-        const laneCars = cars.filter(c => c.lane === ghost.lane && c.x > 0 && c.x < W)
-                             .sort((a, b) => a.x - b.x);
-        let bestX = player.x + 150;
-        let bestGap = 0;
-        for (let i = 1; i < laneCars.length; i++) {
-          const g = laneCars[i].x - laneCars[i - 1].x;
-          if (g > bestGap && laneCars[i - 1].x > player.x) {
-            bestGap = g;
-            bestX = (laneCars[i - 1].x + laneCars[i].x) / 2;
-          }
-        }
-        ghost.x = bestX;
-        ghost.speed = player.speed;
-      }
+      // Wrap around like traffic cars
+      if (ghost.x > W + 100) ghost.x = -100;
+      if (ghost.x < -200)    ghost.x = W + 50;
 
       for (let i = brakeWaves.length - 1; i >= 0; i--) {
         const bw = brakeWaves[i];
@@ -1933,7 +2204,7 @@ function render() {
     ctx.fillStyle = `rgba(${currentTheme === 'spanish' ? '200,100,0' : '255,215,64'},0.75)`;
     ctx.fillText('▲ YOU  (HUMAN)', 10, topEdge + actLaneH * 0.5 + 4);
     ctx.fillStyle = 'rgba(167,139,250,0.85)';
-    ctx.fillText('▲ HOPFEL  (AUTO)', 10, topEdge + actLaneH * 1.5 + 4);
+    ctx.fillText('▲ HOPJam (AUTO)', 10, topEdge + actLaneH * 1.5 + 4);
   }
 
   // Center Dash Markings
@@ -1983,7 +2254,7 @@ function render() {
       ctx.fillStyle = godMode ? '#fff8e1' : '#e9d5ff';
       ctx.font = 'bold 6px Share Tech Mono, monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(godMode ? 'ORACLE' : 'HOPFEL', 0, 2.5);
+      ctx.fillText(godMode ? 'ORACLE' : 'HOPJam', 0, 2.5);
       ctx.restore();
     }
   }
@@ -2002,7 +2273,7 @@ function render() {
       ctx.fillStyle = godMode ? '#fff8e1' : '#e9d5ff';
       ctx.font = 'bold 6px Share Tech Mono, monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(godMode ? 'ORACLE' : 'HOPFEL', 0, 2.5);
+      ctx.fillText(godMode ? 'ORACLE' : 'HOPJam', 0, 2.5);
       ctx.restore();
     }
   }
@@ -2069,7 +2340,7 @@ function drawGhostCar(x, y, w, h, glow) {
   ctx.fillStyle = '#a78bfa';
   ctx.font = 'bold 7px Share Tech Mono, monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('HOPFEL', 0, 3);
+  ctx.fillText('HOPJam', 0, 3);
   ctx.restore();
 }
 
@@ -2137,7 +2408,7 @@ function showResults() {
     // ── Side-by-side: compare player lane vs HOPFEL lane from the same run ──
     document.getElementById('th-col-a').textContent = 'YOUR LANE';
     document.getElementById('th-col-a').className   = 'nohopfel-col';
-    document.getElementById('th-col-b').textContent = 'HOPFEL LANE';
+    document.getElementById('th-col-b').textContent = 'HOPJam LANE';
     document.getElementById('th-col-b').className   = 'hopfel-col';
 
     const playerStability = stats.instabilityCount > 0
@@ -2176,10 +2447,10 @@ function showResults() {
     }
 
   } else {
-    // ── Standard mode: compare WITH vs WITHOUT HOPFEL across two separate runs ──
-    document.getElementById('th-col-a').textContent = 'WITHOUT HOPFEL';
+    // ── Standard mode: compare WITH vs WITHOUT HOPJam across two separate runs ──
+    document.getElementById('th-col-a').textContent = 'WITHOUT HOPJam';
     document.getElementById('th-col-a').className   = 'nohopfel-col';
-    document.getElementById('th-col-b').textContent = 'WITH HOPFEL';
+    document.getElementById('th-col-b').textContent = 'WITH HOPJam';
     document.getElementById('th-col-b').className   = 'hopfel-col';
 
     const fuelEuros = stats.fuel * 1.65;
@@ -2203,7 +2474,7 @@ function showResults() {
     const yesHD = yesH || { time:'—', delay:'—', fuel:'—', co2:'—', brakes:'—', stress:'—', stability:'—' };
 
     if (!noH || !yesH) {
-      const missing = !noH ? 'WITHOUT HOPFEL' : 'WITH HOPFEL';
+      const missing = !noH ? 'WITHOUT HOPJam' : 'WITH HOPJam';
       const notice = document.createElement('tr');
       notice.innerHTML = `<td colspan="4" style="padding:8px 10px;font-size:0.65rem;color:var(--accent-yellow);font-family:'Share Tech Mono',monospace;">
         ⚠ Run the ${missing} mode to fill the other column.</td>`;
@@ -2255,6 +2526,7 @@ function resetSim() {
   document.getElementById('btn-stop').style.display = 'none';
   simRunning = false;
   if (animFrame) cancelAnimationFrame(animFrame);
+  startIdleAnim();
 }
 
 // ════════════════════════════════════════════════════════
@@ -2265,7 +2537,7 @@ function buildSettingsPanel() {
   body.innerHTML = '';
 
   // Split sections into left and right columns
-  const leftKeys  = ['GLOBAL', 'PLAYER', 'BRAKE WAVES', 'HOPFEL GHOST  (single mode)'];
+  const leftKeys  = ['GLOBAL', 'PLAYER', 'BRAKE WAVES', 'HOPJam GHOST — Smooth Follower (PD)', 'HOPJam GHOST — Moving Buffer (AV)'];
   const leftDefs  = PARAM_DEFS.filter(s => leftKeys.includes(s.section));
   const rightDefs = PARAM_DEFS.filter(s => !leftKeys.includes(s.section));
 
@@ -2360,7 +2632,7 @@ function changeDensity(delta) {
 function updateGhostCountDisplay() {
   const N = PARAMS.hopfelCarsCount;
   const el = document.getElementById('ghost-count-total');
-  if (el) el.textContent = N + (N === 1 ? ' HOPFEL car' : ' HOPFEL cars');
+  if (el) el.textContent = N + (N === 1 ? ' HOPJam car' : ' HOPJam cars');
 }
 
 function changeGhostCount(delta) {
@@ -2414,6 +2686,18 @@ function closeSettings() {
   document.getElementById('settings-overlay').classList.add('hidden');
 }
 
+function openGuide() {
+  document.getElementById('guide-overlay').style.display = 'flex';
+}
+
+function closeGuide() {
+  document.getElementById('guide-overlay').style.display = 'none';
+}
+
+document.getElementById('guide-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('guide-overlay')) closeGuide();
+});
+
 function resetParams() {
   PARAMS = { ...DEFAULTS };
   buildSettingsPanel();
@@ -2428,12 +2712,140 @@ function drawStatic() {
   ctx.fillStyle = t.staticBg;
   ctx.fillRect(0, 0, W, H);
 }
+
+// ════════════════════════════════════════════════════════
+//  IDLE / HOME-SCREEN ANIMATION
+// ════════════════════════════════════════════════════════
+let idleAnimFrame = null;
+let idleLaneScroll = 0;
+const idleCarList = [];
+const IDLE_LANES = 3;
+
+function initIdleAnim() {
+  resize();
+  const W = canvas.width, H = canvas.height;
+  const laneH = H / IDLE_LANES;
+  idleCarList.length = 0;
+
+  const colors = ['#3a7fff', '#4a8fff', '#5599ff', '#2266dd', '#44aacc'];
+  const rows = [
+    [{ x: 0.12, spd: 72 }, { x: 0.48, spd: 65 }, { x: 0.82, spd: 78 }],
+    [{ x: 0.30, spd: 90, isPlayer: true }, { x: 0.68, spd: 84 }, { x: 1.05, spd: 91 }],
+    [{ x: 0.05, spd: 95 }, { x: 0.55, spd: 75 }, { x: 0.88, spd: 88 }],
+  ];
+
+  for (let lane = 0; lane < IDLE_LANES; lane++) {
+    for (const cfg of rows[lane]) {
+      idleCarList.push({
+        x: cfg.x * W, y: laneH * (lane + 0.5),
+        speed: cfg.spd, lane,
+        isPlayer: !!cfg.isPlayer,
+        color: cfg.isPlayer ? '#ffd740' : colors[Math.floor(Math.random() * colors.length)],
+        width: cfg.isPlayer ? 44 : 40,
+        height: cfg.isPlayer ? 22 : 19,
+      });
+    }
+  }
+  // One ghost car trailing behind the player
+  idleCarList.push({
+    x: rows[1][0].x * W + 90, y: laneH * 1.5,
+    speed: 88, lane: 1,
+    isGhost: true, glowPhase: 0,
+    width: 46, height: 24,
+  });
+}
+
+function drawIdleBg() {
+  const W = canvas.width, H = canvas.height;
+  const t = THEMES[currentTheme];
+
+  // Sky
+  const sky = ctx.createLinearGradient(0, 0, 0, H * 0.15);
+  sky.addColorStop(0, t.sky[0]);
+  sky.addColorStop(1, t.sky[1]);
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, H * 0.15);
+
+  // Road
+  const rg = ctx.createLinearGradient(0, H * 0.12, 0, H);
+  rg.addColorStop(0, t.road[0]);
+  rg.addColorStop(0.5, t.road[1]);
+  rg.addColorStop(1, t.road[2]);
+  ctx.fillStyle = rg;
+  ctx.fillRect(0, H * 0.12, W, H * 0.88);
+
+  // Scrolling lane dividers
+  const laneH = H / IDLE_LANES;
+  ctx.save();
+  ctx.strokeStyle = t.laneLine;
+  ctx.lineWidth = 2;
+  ctx.setLineDash([40, 30]);
+  ctx.lineDashOffset = -(idleLaneScroll % 70);
+  for (let i = 1; i < IDLE_LANES; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, laneH * i);
+    ctx.lineTo(W, laneH * i);
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // Subtle centre-road glow (neon only)
+  if (currentTheme === 'neon-city') {
+    const glow = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.6);
+    glow.addColorStop(0, 'rgba(58,127,255,0.04)');
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+  }
+}
+
+function idleLoop() {
+  if (simRunning) { idleAnimFrame = null; return; }
+  const W = canvas.width, H = canvas.height;
+  const laneH = H / IDLE_LANES;
+  const dt = 0.016;
+  idleLaneScroll += (90 / 3.6 * 8) * dt;
+
+  for (const car of idleCarList) {
+    car.x -= (car.speed / 3.6 * 8) * dt;   // cars drift left = cinematic "watching traffic go by"
+    if (car.x < -80) car.x = W + 80;
+    car.y = laneH * (car.lane + 0.5);
+    if (car.isGhost) car.glowPhase = (car.glowPhase || 0) + dt * 3;
+  }
+
+  ctx.clearRect(0, 0, W, H);
+  drawIdleBg();
+
+  for (const car of idleCarList) {
+    if (car.isGhost) continue;
+    drawCar(car.x, car.y, car.width, car.height, car.color, false, car.isPlayer);
+  }
+  for (const car of idleCarList) {
+    if (!car.isGhost) continue;
+    drawGhostCar(car.x, car.y, car.width, car.height, (Math.sin(car.glowPhase) + 1) / 2);
+  }
+
+  idleAnimFrame = requestAnimationFrame(idleLoop);
+}
+
+function startIdleAnim() {
+  initIdleAnim();
+  if (idleAnimFrame) cancelAnimationFrame(idleAnimFrame);
+  idleAnimFrame = requestAnimationFrame(idleLoop);
+}
+
+function stopIdleAnim() {
+  if (idleAnimFrame) { cancelAnimationFrame(idleAnimFrame); idleAnimFrame = null; }
+}
+
 resize();
 setMode(false);
-setComparisonMode(true);
+setComparisonMode(false);
 applyTheme('neon-city');
 updateDensityDisplay();
 updateGhostCountDisplay();
+startIdleAnim();
 </script>
 </body>
 </html>
