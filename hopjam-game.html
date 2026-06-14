@@ -1555,6 +1555,80 @@ document.addEventListener('keydown', e => {
 });
 
 // ════════════════════════════════════════════════════════
+//  GAMEPAD / CONTROLLER SUPPORT
+//  D-pad or left stick up/down = accelerate/decelerate
+//  A button / X button / right shoulder = induce jam (J)
+// ════════════════════════════════════════════════════════
+let gamepadState = {
+  lastDirection: 0,
+  jamPressed: false,
+  startPressed: false,
+};
+
+function gamepadButtonPressed(gp, index) {
+  return !!(gp.buttons[index] && gp.buttons[index].pressed);
+}
+
+function readGamepadControls() {
+  const pads = navigator.getGamepads ? navigator.getGamepads() : [];
+  const gp = pads && pads[0];
+
+  if (gp) {
+    // Standard mapping:
+    // buttons 12/13 = D-pad up/down, axis 1 = left stick vertical
+    const dpadUp = gamepadButtonPressed(gp, 12);
+    const dpadDown = gamepadButtonPressed(gp, 13);
+    const leftStickY = gp.axes && gp.axes.length > 1 ? gp.axes[1] : 0;
+
+    let direction = 0;
+    if (dpadUp || leftStickY < -0.45) direction = 1;
+    else if (dpadDown || leftStickY > 0.45) direction = -1;
+
+    if (direction !== gamepadState.lastDirection) {
+      if (direction === 1) playerAccel();
+      else if (direction === -1) playerDecel();
+      else playerKeep();
+      gamepadState.lastDirection = direction;
+    }
+
+    // Try several common buttons for "J" because generic controllers vary:
+    // 0 = A, 1 = B, 2 = X, 3 = Y, 5 = right shoulder.
+    const jamNow =
+      gamepadButtonPressed(gp, 0) ||
+      gamepadButtonPressed(gp, 1) ||
+      gamepadButtonPressed(gp, 2) ||
+      gamepadButtonPressed(gp, 3) ||
+      gamepadButtonPressed(gp, 5);
+
+    if (jamNow && !gamepadState.jamPressed) {
+      induceJam();
+    }
+    gamepadState.jamPressed = jamNow;
+
+    // Optional: Start button starts the simulation from the start screen.
+    const startNow = gamepadButtonPressed(gp, 9);
+    if (startNow && !gamepadState.startPressed && !simRunning) {
+      startSim();
+    }
+    gamepadState.startPressed = startNow;
+  }
+
+  requestAnimationFrame(readGamepadControls);
+}
+
+window.addEventListener('gamepadconnected', e => {
+  console.log('Gamepad connected:', e.gamepad.id);
+});
+window.addEventListener('gamepaddisconnected', e => {
+  console.log('Gamepad disconnected:', e.gamepad.id);
+  gamepadState.lastDirection = 0;
+  gamepadState.jamPressed = false;
+  gamepadState.startPressed = false;
+});
+
+readGamepadControls();
+
+// ════════════════════════════════════════════════════════
 //  GAME LOOP
 // ════════════════════════════════════════════════════════
 function gameLoop(ts) {
